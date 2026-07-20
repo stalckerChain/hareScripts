@@ -1,0 +1,3 @@
+import sys
+import json from bip39 import mnemonic_to_seed
+from eth_account import Account def generate_account(index: int) -> dict: acct = Account.create() name = f"sibil_{index}" return { "name": name, "email": "", "evm": { "address": acct.address, "private_key": acct.key.hex(), }, } def main(): if len < 2: print("Usage: python create_family.py <number_of_accounts>") sys.exit(1) try: count = int(sys.argv) except ValueError: print("Error: argument must be an integer") sys.exit(1) accounts = [generate_account(i + 1) for i in range(count)] with open("accounts.json", "w", encoding="utf-8") as f: json.dump(accounts, f, indent=4, ensure_ascii=False) print(f"Создано {count} аккаунтов") if __name__ == "__main__": main()
